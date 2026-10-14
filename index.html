@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100c20">
+<title>ZENVORA — Your World</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#100c20;color:white;font-family:Arial,sans-serif}
+header{padding:20px;background:#19132c;border-bottom:1px solid #44345d;position:sticky;top:0}
+.logo{font-size:27px;font-weight:bold;color:#d5a6ff}
+.tag{font-size:12px;color:#c7b9d9;margin-top:5px}
+nav{display:flex;justify-content:space-around;padding:14px;background:#19132c}
+nav a{color:white;text-decoration:none;font-size:13px}
+main{max-width:600px;margin:auto;padding:16px}
+.hero{padding:25px 10px;text-align:center}
+h1{font-size:34px;margin-bottom:10px}
+.purple{color:#d5a6ff}
+button{background:#bd75ff;color:#160d25;border:0;border-radius:10px;padding:12px 17px;font-weight:bold;cursor:pointer}
+.card{background:#201832;border:1px solid #49365f;border-radius:16px;padding:17px;margin:15px 0}
+input,textarea{width:100%;padding:12px;margin:8px 0;background:#120d20;color:white;border:1px solid #59456c;border-radius:9px}
+.posthead{display:flex;align-items:center;gap:10px;font-weight:bold}
+.avatar{background:#bd75ff;color:#170d26;border-radius:50%;padding:12px}
+.posttext{line-height:1.6}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.small{color:#c7b9d9;font-size:13px}
+footer{text-align:center;padding:30px;color:#c7b9d9;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">✦ ZENVORA</div>
+<div class="tag">Your World. Your People. Your Moment.</div>
+</header>
+<nav>
+<a href="#home">Home</a>
+<a href="#discover">Discover</a>
+<a href="#create">Create</a>
+<a href="#about">About</a>
+</nav>
+<main id="home">
+<section class="hero">
+<p class="purple">A NEW WORLD OF CONNECTION</p>
+<h1>Your world.<br><span class="purple">Your people.</span></h1>
+<p>Meet people, share your moments and let the world discover you.</p>
+<button onclick="document.getElementById('create').scrollIntoView()">Create a post ↓</button>
+</section>
+<section class="card" id="discover">
+<h2>🌍 Global Spotlight</h2>
+<p>Every voice deserves a chance to be seen. Discover people and ideas from around the world.</p>
+<p class="small">Our mission: help ordinary creators reach extraordinary audiences.</p>
+</section>
+<section class="card" id="create">
+<h2>✍️ Share a moment</h2>
+<textarea id="message" rows="3" placeholder="What's happening in your world?"></textarea>
+<button onclick="publish()">Publish post</button>
+<p class="small">Demo version: posts are saved only in this browser.</p>
+</section>
+<section id="feed">
+<h2>✨ Community feed</h2>
+<div class="card">
+<div class="posthead"><span class="avatar">Z</span>ZENVORA Community</div>
+<p class="posttext">Welcome to ZENVORA! A place where the world comes closer, one moment at a time. 💜🌍</p>
+<div class="actions"><button onclick="like(this)">♡ Like</button><button onclick="sharePost()">↗ Share</button></div>
+</div>
+</section>
+<section class="card" id="about">
+<h2>💜 Our vision</h2>
+<p>ZENVORA is being built for a world without borders. Share your story, discover new voices and find your community.</p>
+<p class="small">The beginning of something global.</p>
+</section>
+</main>
+<footer>© 2026 ZENVORA · Your World. Your People. Your Moment.</footer>
+<script>
+function publish(){
+let box=document.getElementById('message');
+let value=box.value.trim();
+if(!value){alert('Write something first!');return}
+let card=document.createElement('div');
+card.className='card';
+let name=document.createElement('div');
+name.className='posthead';
+name.textContent='🌍 Community member';
+let text=document.createElement('p');
+text.className='posttext';
+text.textContent=value;
+let button=document.createElement('button');
+button.textContent='♡ Like';
+button.onclick=function(){like(button)};
+card.append(name,text,button);
+document.getElementById('feed').prepend(card);
+box.value='';
+}
+function like(button){
+if(button.dataset.liked){button.textContent='♡ Like';delete button.dataset.liked}
+else{button.textContent='♥ Liked';button.dataset.liked='yes'}
+}
+function sharePost(){
+if(navigator.share){navigator.share({title:'ZENVORA',text:'Discover ZENVORA — Your World. Your People. Your Moment.'})}
+else{alert('Welcome to ZENVORA! Copy your website address to share it.')}
+}
+</script>
+</body>
+  </html>
